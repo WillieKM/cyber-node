@@ -1,12 +1,12 @@
-# ...
-steps:
-  - uses: actions/download-artifact@v4'
-    with:
-      name: firebase-hosting-files
-      path: './build'
-  - uses: 'firebase/hosting-deploy@v0'
-    with:
-      repoToken: '${{ secrets.GITHUB_TOKEN }}'
-      projectId: 'my-student-portal-e4922'  <-- Check indentation here
-      channelId: 'preview-${{ github.event.number }}'
-      # ...
+# ... (lines 1 - 23 are fine)
+    steps:
+      - uses: 'actions/download-artifact@v4'  <-- Correct format for download artifact
+        with:
+          name: firebase-hosting-files
+          path: './build'
+      - uses: 'firebase/hosting-deploy@v0'  <-- THIS IS THE CRITICAL LINE THAT WAS BROKEN
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          projectId: 'my-student-portal-e4922'
+          channelId: 'preview-${{ github.event.number }}'
+          channelDuration: '7d'
