@@ -1,0 +1,13 @@
+# We need to switch back to the 'main' branch to commit the config file
+git checkout main
+
+# Stage the new folder and file
+git add .github
+
+# Commit the file
+git commit -m feat Final WIF workflow configuration
+
+# Push the critical file to GitHub's main branch
+git push
+
+Let me know the final output of the `git push` command! That is the moment the deployment will finally start working.
