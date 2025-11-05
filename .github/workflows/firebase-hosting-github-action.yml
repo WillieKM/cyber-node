@@ -1,5 +1,5 @@
 git add .github/workflows/firebase-hosting-github-action.yml
-git commit -m fix: Final clean and validated YAML structure
+git commit -m "fix: Pushing final verified and clean YAML code"
 git push
 
-If the `git push` is successful, **please check the GitHub Actions tab immediately.** This is the fix that addresses the YAML syntax error you were seeing on line 8. You should see a new run start for the Pull Request! Let me know if you see the job running!
+Please let me know the status of the new workflow run on the **Actions** tab after you run `git push`! It should be green this time.
