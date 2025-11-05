@@ -1,0 +1,55 @@
+﻿"use client";
+
+import { useState } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+
+export default function ContactForm() {
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+  const [hcaptchaToken, setHcaptchaToken] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (!hcaptchaToken) { alert("Please complete the captcha first."); return; }
+
+    setLoading(true);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...data, "h-captcha-response": hcaptchaToken }),
+    });
+    setLoading(false);
+
+    if (res.ok) { setDone(true); form.reset(); setHcaptchaToken(null); }
+    else { alert("Something went wrong. Please try again later."); }
+  }
+
+  if (done) return <div className="card"><p>✅ Thanks! We’ll reach out shortly.</p></div>;
+
+  return (
+    <form onSubmit={onSubmit} className="card space-y-4">
+      <div>
+        <label className="text-sm">Name</label>
+        <input name="name" required placeholder="Jane Doe" className="border p-2 rounded w-full" />
+      </div>
+      <div>
+        <label className="text-sm">Email</label>
+        <input name="email" type="email" required placeholder="jane@example.com" className="border p-2 rounded w-full" />
+      </div>
+      <div>
+        <label className="text-sm">Message</label>
+        <textarea name="message" required placeholder="Your message..." className="border p-2 rounded w-full"></textarea>
+      </div>
+      <div>
+        <HCaptcha
+  sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY ?? "10000000-ffff-ffff-ffff-000000000001"}
+  onVerify={(t) => setHcaptchaToken(t)}
+/>
+
+      </div>
+      <button className="btn-primary" disabled={loading || !hcaptchaToken}>{loading ? "Sending…" : "Send"}</button>
+    </form>
+  );
+}
