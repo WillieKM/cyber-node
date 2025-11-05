@@ -1,5 +1,12 @@
-git add .github/workflows/firebase-hosting-github-action.yml
-git commit -m "fix: Final clean and valid YAML workflow file"
-git push
-
-**After you run `git push`, please immediately check the GitHub Actions tab again.** The existing Pull Request should now re-trigger the workflow and start the deployment! Let me know if you see the workflow running or if it succeeds!
+# ...
+steps:
+  - uses: actions/download-artifact@v4'
+    with:
+      name: firebase-hosting-files
+      path: './build'
+  - uses: 'firebase/hosting-deploy@v0'
+    with:
+      repoToken: '${{ secrets.GITHUB_TOKEN }}'
+      projectId: 'my-student-portal-e4922'  <-- Check indentation here
+      channelId: 'preview-${{ github.event.number }}'
+      # ...
