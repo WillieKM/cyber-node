@@ -1,13 +1,5 @@
-# We need to switch back to the 'main' branch to commit the config file
-git checkout main
-
-# Stage the new folder and file
-git add .github
-
-# Commit the file
-git commit -m feat Final WIF workflow configuration
-
-# Push the critical file to GitHub's main branch
+git add .github/workflows/firebase-hosting-github-action.yml
+git commit -m "fix: Final clean and valid YAML workflow file"
 git push
 
-Let me know the final output of the `git push` command! That is the moment the deployment will finally start working.
+**After you run `git push`, please immediately check the GitHub Actions tab again.** The existing Pull Request should now re-trigger the workflow and start the deployment! Let me know if you see the workflow running or if it succeeds!
