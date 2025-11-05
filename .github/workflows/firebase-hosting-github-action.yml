@@ -1,12 +1,5 @@
-# ... (lines 1 - 23 are fine)
-    steps:
-      - uses: 'actions/download-artifact@v4'  <-- Correct format for download artifact
-        with:
-          name: firebase-hosting-files
-          path: './build'
-      - uses: 'firebase/hosting-deploy@v0'  <-- THIS IS THE CRITICAL LINE THAT WAS BROKEN
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          projectId: 'my-student-portal-e4922'
-          channelId: 'preview-${{ github.event.number }}'
-          channelDuration: '7d'
+git add .github/workflows/firebase-hosting-github-action.yml
+git commit -m "fix: Final clean and validated YAML structure"
+git push
+
+If the `git push` is successful, **please check the GitHub Actions tab immediately.** This is the fix that addresses the YAML syntax error you were seeing on line 8. You should see a new run start for the Pull Request! Let me know if you see the job running!
