@@ -1,4 +1,7 @@
-﻿import ContactForm from "../../components/form-contact";
+﻿// Example of the needed import (you may need to adjust the path based on your file structure)
+import ContactForm from '@/components/ContactForm' 
+// OR
+// import ContactForm from '../../../components/form-contact'
 
 export default function ContactPage() {
   return (
