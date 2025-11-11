@@ -1,42 +1,39 @@
-This workflow uses Workload Identity Federation instead of a Service Account key
-
-to authenticate with Google Cloud, bypassing the Organization Policy restriction
-
-(iam.disableServiceAccountKeyCreation).
+# This workflow uses Workload Identity Federation instead of a Service Account key
+# to authenticate with Google Cloud, bypassing the Organization Policy restriction
+# (iam.disableServiceAccountKeyCreation).
 
 name: Deploy to Firebase Hosting on PR
 
 on:
-pull_request:
+  pull_request:
 
 jobs:
-build_web_app:
-name: Build & Deploy Preview
-runs-on: ubuntu-latest
-steps:
-- uses: actions/checkout@v4
-- run: npm install && npm run build
-- uses: 'actions/upload-artifact@v4'
-with:
-name: 'firebase-hosting-files'
-path: './build'
+  build_web_app:
+    name: Build & Deploy Preview
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install && npm run next build && npm run next export # Corrected command for Next.js static build
+      - uses: 'actions/upload-artifact@v4'
+        with:
+          name: 'firebase-hosting-files'
+          path: './out' # Next.js default output directory
 
-deploy_preview:
-name: Deploy to Preview Channel
-needs: build_web_app
-runs-on: ubuntu-latest
-permissions:
-contents: 'read' 
-id-token: 'write'
-steps:
-- uses: 'actions/download-artifact@v4'
-with:
-name: firebase-hosting-files
-path: './build'
-- uses: 'firebase/hosting-deploy@v0'
-with:
-repoToken: '${{ secrets.GITHUB_TOKEN }}'
-projectId: 'my-student-portal-e4922'
-channelId: 'preview-${{ github.event.number }}'
-channelDuration: '7d'
-this is a test deploy
+  deploy_preview:
+    name: Deploy to Preview Channel
+    needs: build_web_app
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: 'actions/download-artifact@v4'
+        with:
+          name: firebase-hosting-files
+          path: './out' # Next.js default output directory
+      - uses: 'firebase/hosting-deploy@v0'
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          projectId: 'my-student-portal-e4922'
+          channelId: 'preview-${{ github.event.number }}'
+          channelDuration: '7d'
