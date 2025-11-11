@@ -13,11 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm install && npm run next build && npm run next export # Corrected command for Next.js static build
-      - uses: 'actions/upload-artifact@v4'
-        with:
-          name: 'firebase-hosting-files'
-          path: './out' # Next.js default output directory
+
 
   deploy_preview:
     name: Deploy to Preview Channel
@@ -30,11 +26,10 @@ jobs:
       - uses: 'actions/download-artifact@v4'
         with:
           name: firebase-hosting-files
-          path: './out' # Next.js default output directory
+
       - uses: 'firebase/hosting-deploy@v0'
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           projectId: 'my-student-portal-e4922'
           channelId: 'preview-${{ github.event.number }}'
           channelDuration: '7d'
-          # FINAL ATTEMPT - 11/10
