@@ -1,16 +1,31 @@
-﻿// Example of the needed import (you may need to adjust the path based on your file structure)
-import ContactForm from '@/components/ContactForm' 
-// OR
-// import ContactForm from '../../../components/form-contact'
+﻿// This file is located in cyber-node/app/contact/page.tsx
 
-export default function ContactPage() {
+// We use the Next.js path alias '@/components/' to reliably locate the component.
+import ContactForm from '@/components/ContactForm';
+import React from 'react';
+
+export const metadata = {
+  title: 'Contact Cyber-Node',
+  description: 'Get in touch with the Cyber-Node team.',
+};
+
+const ContactPage: React.FC = () => {
   return (
-    <main className="min-h-screen">
-      <section className="max-w-3xl mx-auto px-4 py-16 space-y-6">
-        <h1 className="text-4xl font-bold tracking-tight">Contact</h1>
-        <p className="text-slate-600">Tell us what you need and we’ll get back to you.</p>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
+      <div className="max-w-3xl w-full px-4 sm:px-6 lg:px-8">
+        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-6">
+          Contact Us
+        </h1>
+        <p className="text-xl text-gray-600 text-center mb-10">
+          We'd love to hear from you. Send us a message below.
+        </p>
+        
+        {/* The imported ContactForm component is placed here */}
         <ContactForm />
-      </section>
-    </main>
+
+      </div>
+    </div>
   );
-}
+};
+
+export default ContactPage;
