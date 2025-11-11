@@ -39,3 +39,4 @@ repoToken: '${{ secrets.GITHUB_TOKEN }}'
 projectId: 'my-student-portal-e4922'
 channelId: 'preview-${{ github.event.number }}'
 channelDuration: '7d'
+this is a test deploy
