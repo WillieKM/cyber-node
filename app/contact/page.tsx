@@ -1,29 +1,11 @@
-﻿// This file is located in cyber-node/app/contact/page.tsx
+﻿import React from 'react';
 
-// We use the Next.js path alias '@/components/' to reliably locate the component.
-import ContactForm from '@/components/ContactForm';
-import React from 'react';
-
-export const metadata = {
-  title: 'Contact Cyber-Node',
-  description: 'Get in touch with the Cyber-Node team.',
-};
-
-const ContactPage: React.FC = () => {
+// This is an empty placeholder page to prevent errors from other components 
+// attempting to import ContactForm, which is not needed for the Prayer Journal.
+const ContactPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
-      <div className="max-w-3xl w-full px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-6">
-          Contact Us
-        </h1>
-        <p className="text-xl text-gray-600 text-center mb-10">
-          We'd love to hear from you. Send us a message below.
-        </p>
-        
-        {/* The imported ContactForm component is placed here */}
-        <ContactForm />
-
-      </div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <h1 className="text-3xl font-bold text-gray-700">Contact Page Placeholder</h1>
     </div>
   );
 };
